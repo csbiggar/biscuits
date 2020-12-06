@@ -21,6 +21,7 @@ dependencies {
     implementation(platform("org.http4k:http4k-bom:$http4kBomVersion"))
     implementation("org.http4k:http4k-core")
     implementation("org.http4k:http4k-server-netty")
+    implementation("org.http4k:http4k-format-jackson")
 
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitJupiterEngineVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-params:$junitJupiterVersion")

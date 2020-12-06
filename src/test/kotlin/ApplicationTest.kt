@@ -3,6 +3,7 @@ import org.http4k.core.Method
 import org.http4k.core.Request
 import org.http4k.core.Status
 import org.junit.jupiter.api.Test
+import org.skyscreamer.jsonassert.JSONAssert
 
 class ApplicationTest {
 
@@ -14,6 +15,30 @@ class ApplicationTest {
         // Then
         assertThat(result.status).isEqualTo(Status.OK)
         assertThat(result.bodyString()).isEqualTo("Pact example provider application")
+    }
+
+    @Test
+    fun `should return canned response`() {
+        // When
+        val result = createApp()(Request(Method.GET, "/biscuits/1"))
+
+        assertThat(result.status).isEqualTo(Status.OK)
+        assertThat(result.header("Content-Type")).isEqualTo("application/json; charset=utf-8")
+
+        JSONAssert.assertEquals(""" { "name" : "Club" }""", result.body.toString(), false)
+
+    }
+
+    @Test
+    fun `should handle not found`() {
+        // When
+        val result = createApp()(Request(Method.GET, "/biscuits/missing"))
+
+        assertThat(result.status).isEqualTo(Status.NOT_FOUND)
+        assertThat(result.header("Content-Type")).isEqualTo("application/json; charset=utf-8")
+
+        JSONAssert.assertEquals(""" { "message" : "There is no biscuit with id missing" }""", result.body.toString(), false)
+
     }
 
 }
