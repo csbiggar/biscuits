@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "1.4.10"
+    application
 }
 
 group = "org.example"
@@ -13,7 +14,7 @@ val http4kBomVersion = "3.279.0"
 
 val junitJupiterVersion = "5.3.1"
 val junitJupiterEngineVersion = "5.5.1"
-val assertJVersion="3.13.2"
+val assertJVersion = "3.13.2"
 val skyscreamerVersion = "1.5.0"
 
 dependencies {
@@ -27,6 +28,10 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-params:$junitJupiterVersion")
     testImplementation("org.assertj:assertj-core:$assertJVersion")
     testImplementation("org.skyscreamer:jsonassert:$skyscreamerVersion")
+}
+
+application {
+    mainClass.set("ApplicationKt")
 }
 
 tasks {
