@@ -1,2 +1,2 @@
-rootProject.name = "pact-provider-example"
+rootProject.name = "biscuits"
 
