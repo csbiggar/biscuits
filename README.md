@@ -1,7 +1,8 @@
 ### PACT  - Example Provider application
 
-Simple application serving up a "get biscuits by id" api, to demonstrate the Provider side of pact contract testing
+Simple application serving up a "get biscuits by id" api, to demonstrate the Provider side of pact contract testing. 
 
+Part of the  [workshop steps here](https://github.com/csbiggar/pact-contract-testing-workshop)
 
 ### Prerequisites
 
