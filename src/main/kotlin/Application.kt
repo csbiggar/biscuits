@@ -32,6 +32,7 @@ fun createApp() = routes(
 fun getBiscuit(request: Request): Response {
 
     val biscuitId = request.path("id")
+    println("Requesting biscuit of Id $biscuitId")
     val biscuit = findBiscuit(biscuitId)
 
     return when (biscuit) {
