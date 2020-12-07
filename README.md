@@ -11,4 +11,4 @@ Simple application serving up a "get biscuits by id" api, to demonstrate the Pro
 
     ./gradlew build run
 
-then visit http:localhost:9000/biscuits/1
+then visit http://localhost:9000/biscuits/1
