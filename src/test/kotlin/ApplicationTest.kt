@@ -1,3 +1,4 @@
+import helpers.assertThatJson
 import org.assertj.core.api.Assertions.assertThat
 import org.http4k.core.Method
 import org.http4k.core.Request
@@ -25,8 +26,18 @@ class ApplicationTest {
         assertThat(result.status).isEqualTo(Status.OK)
         assertThat(result.header("Content-Type")).isEqualTo("application/json; charset=utf-8")
 
-        JSONAssert.assertEquals(""" { "name" : "Club" }""", result.body.toString(), false)
+        assertThatJson(result.body.toString()).isExactlyEqualTo(""" { "name" : "Club" }""", )
+    }
 
+    @Test
+    fun `should return all biscuits`() {
+        // When
+        val result = createApp()(Request(Method.GET, "/biscuits"))
+
+        assertThat(result.status).isEqualTo(Status.OK)
+        assertThat(result.header("Content-Type")).isEqualTo("application/json; charset=utf-8")
+
+        assertThatJson(result.body.toString()).isExactlyEqualTo(""" [{ "name" : "Club" }, { "name" : "Trio" }]""",)
     }
 
     @Test
@@ -38,7 +49,6 @@ class ApplicationTest {
         assertThat(result.header("Content-Type")).isEqualTo("application/json; charset=utf-8")
 
         JSONAssert.assertEquals(""" { "message" : "There is no biscuit with id missing" }""", result.body.toString(), false)
-
     }
 
 }

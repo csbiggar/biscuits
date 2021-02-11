@@ -27,6 +27,7 @@ fun main() {
 fun createApp() = routes(
     "/" bind Method.GET to { request: Request -> Response(OK).body("Pact example provider application") },
     "biscuits/{id}" bind Method.GET to ::getBiscuit,
+    "biscuits" bind Method.GET to ::getAllBiscuits,
 )
 
 fun getBiscuit(request: Request): Response {
@@ -50,7 +51,19 @@ fun getBiscuit(request: Request): Response {
             )
         }
     }
+}
 
+fun getAllBiscuits(request: Request): Response {
+    val biscuits = listOf(
+        findBiscuit("1"),
+        findBiscuit("2")
+    )
+        .filterIsInstance<Biscuit>()
+
+    val responseShape = Body.auto<List<Biscuit>>().toLens()
+    return Response(OK).with(
+        responseShape of biscuits
+    )
 }
 
 private data class ErrorResponse(val message: String)
